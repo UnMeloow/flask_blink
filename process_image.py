@@ -2,7 +2,6 @@ import cv2
 import dlib
 import numpy as np
 from imutils import face_utils
-from PIL import Image
 
 
 class Colors:
@@ -111,6 +110,7 @@ def cropEyes(frame, im_size):
     right_eye_rect = np.rint([minxr, minyr, maxxr, maxyr])
     right_eye_rect = right_eye_rect.astype(int)
     right_eye_image = gray[right_eye_rect[1]:right_eye_rect[3], right_eye_rect[0]:right_eye_rect[2]]
+    cv2.imshow('image', right_eye_image)
 
     # if it doesn't detect left or right eye return None
 
@@ -127,11 +127,11 @@ def cropEyes(frame, im_size):
 def classify_image(image_path, eye_model, im_size):
     image = cv2.imread(image_path)
     left_eye, right_eye = cropEyes(image, im_size)
-
     left_eye = cnnPreprocess(left_eye)
     right_eye = cnnPreprocess(right_eye)
     left_eye_pred = eye_model.predict(left_eye)
     right_eye_pred = eye_model.predict(right_eye)
+
     left_eye_res = "Ваш левый глаз: "
     right_eye_res = "Ваш правый глаз: "
     if left_eye_pred <= 0.1:
