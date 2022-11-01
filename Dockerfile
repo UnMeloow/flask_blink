@@ -1,42 +1,17 @@
-FROM ubuntu:latest
-FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
-RUN apk --update add bash nano
+FROM python:3
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 COPY . /app
 WORKDIR /app
-RUN apk update
-RUN apk add linux-headers
-RUN apk add make automake gcc g++ subversion python3-dev wget cmake git unzip
-RUN pip install numpy
-RUN pip install --upgrade pip
-RUN python -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.1.0-py3-none-any.whl
-RUN cd \
-    && wget https://github.com/opencv/opencv/archive/3.2.0.zip \
-    && unzip 3.2.0.zip \
-    && cd opencv-3.2.0 \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make -j8 \
-    && make install \
-    && cd \
-    && rm 3.2.0.zip
-
-
-# Third: install and build opencv_contrib
-#
-RUN cd \
-    && wget https://github.com/opencv/opencv_contrib/archive/3.2.0.zip \
-    && unzip 3.2.0.zip \
-    && cd opencv-3.2.0/build \
-    && cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.2.0/modules/ .. \
-    && make -j8 \
-    && make install \
-    && cd ../.. \
-    && rm 3.2.0.zip
-
+# Use an official Python runtime as a parent image
+# Set the working directory to /app
 COPY requirements.txt /usr/src/app/
-RUN pip install -r requirements.txt
-ENTRYPOINT ['python']
-CMD ['app.py']
+# Install any needed packages specified in requirements.txt
+RUN pip install numpy
+RUN pip install -U pip wheel cmake
+RUN pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py3-none-any.whl
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+# Run app.py when the container launches
+CMD ["python", "app.py"]

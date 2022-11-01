@@ -2,11 +2,12 @@ Flask==2.0.3
 idna==3.4
 itsdangerous
 Jinja2
-tensorflow
-keras
 regex
 requests
-
+numpy
 imutils
 setuptools
+
+Keras
 dlib
+
