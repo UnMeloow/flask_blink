@@ -125,14 +125,21 @@ def cropEyes(frame, im_size):
 
 def classify_image(image_path, eye_model, im_size):
     image = cv2.imread(image_path)
-    left_eye, right_eye = cropEyes(image, im_size)
+    left_eye_res = "Ваш левый глаз: "
+    right_eye_res = "Ваш правый глаз: "
+
+    try:
+        left_eye, right_eye = cropEyes(image, im_size)
+    except TypeError:
+        left_eye_res += "не удалось определить."
+        right_eye_res += "не удалось определить."
+        return left_eye_res, right_eye_res
+
     left_eye = cnnPreprocess(left_eye)
     right_eye = cnnPreprocess(right_eye)
     left_eye_pred = eye_model.predict(left_eye)
     right_eye_pred = eye_model.predict(right_eye)
 
-    left_eye_res = "Ваш левый глаз: "
-    right_eye_res = "Ваш правый глаз: "
     if left_eye_pred <= 0.1:
         left_eye_res += "закрыт."
     else:

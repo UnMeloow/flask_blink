@@ -1,7 +1,9 @@
-import os
 import glob
-from keras.models import load_model
+import os
+
 from flask import Flask, render_template, request, send_from_directory
+from keras.models import load_model
+
 from process_image import classify_image
 
 app = Flask(__name__)
@@ -52,4 +54,3 @@ def send_file(filename):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-    app.run()

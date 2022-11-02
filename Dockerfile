@@ -18,5 +18,5 @@ RUN apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip install dlib
 EXPOSE 5000
 # Run app.py when the container launches
-
-CMD ["python", "app.py"]
+ENTRYPOINT ["python"]
+CMD ["app.py"]

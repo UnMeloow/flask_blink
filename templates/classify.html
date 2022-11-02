@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blinking detector</title>
@@ -11,44 +11,43 @@
     </style>
 
     <style>
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 
-  </head>
+</head>
 
-    
+
 <body>
 
 <section class="hero is-fullheight" has-background-black>
 
 
+    <div class="columns">
+        <div class="column is-narrow">
+        </div>
 
-        <div class="columns">
-                <div class="column is-narrow">
-                </div>
 
+        <div class="column is-one-half has-text-centered">
+            <!-- <figure class="image is-1by1"> -->
+            <img class="pred_img" src="{{ url_for('send_file', filename=image_file_name) }}"/>
+            <!-- </figure> -->
+        </div>
+        <div class="column is-one-half has-text-centered" style="font-size:2.5rem">
 
-                <div class="column is-one-half has-text-centered">
-                  <!-- <figure class="image is-1by1"> -->
-                    <img class="pred_img" src="{{ url_for('send_file', filename=image_file_name)}}"/>
-                  <!-- </figure> -->
-                </div>
-                <div class="column is-one-half has-text-centered" style="font-size:2.5rem" >
-      
-                        <h2 id ="pred" style="color:black">
-                            <span style="font-weight: bold; color:whitesmoke;">{{ l_res }} {{ r_res }}</span>
-                        </h2>
+            <h2 id="pred" style="color:black">
+                <span style="font-weight: bold; color:black;">{{ l_res }} {{ r_res }}</span>
+            </h2>
 
-                        <br>
-                        <a href="/" class="button is-black is-inverted" style="font-size:1.5rem">Back to Home</a>
-                    </div>
-            </div>
+            <br>
+            <a href="/" class="button is-black is-inverted" style="font-size:1.5rem">Back to Home</a>
+        </div>
+    </div>
 
-<script src="/static/script.js"></script>
+    <script src="/static/script.js"></script>
 
 </body>
 </html>
