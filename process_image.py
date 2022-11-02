@@ -110,7 +110,6 @@ def cropEyes(frame, im_size):
     right_eye_rect = np.rint([minxr, minyr, maxxr, maxyr])
     right_eye_rect = right_eye_rect.astype(int)
     right_eye_image = gray[right_eye_rect[1]:right_eye_rect[3], right_eye_rect[0]:right_eye_rect[2]]
-    cv2.imshow('image', right_eye_image)
 
     # if it doesn't detect left or right eye return None
 

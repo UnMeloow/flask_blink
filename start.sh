@@ -1,7 +1,6 @@
 #!/bin/bash
-app="docker.test"
-mkdir "uploads"
-sudo docker ps
-sudo docker run -d -p 56733:80 \
+app="flask_server"
+sudo docker build -t ${app} .
+sudo docker run -it -d -p 56733:50 \
   --name=${app} \
   -v "$PWD":/app ${app}

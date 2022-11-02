@@ -9,5 +9,3 @@ imutils
 setuptools
 
 Keras
-dlib
-

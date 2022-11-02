@@ -30,14 +30,12 @@ def home():
 
 @app.route("/classify", methods=["POST", "GET"])
 def upload_file():
-
     if request.method == "GET":
         return render_template("home.html")
 
     else:
         file = request.files["image"]
         upload_image_path = os.path.join(UPLOAD_FOLDER, file.filename.replace("\\\\", ""))
-        print(file.filename)
         file.save(upload_image_path)
 
         l_res, r_res = classify_image(upload_image_path, model, IMAGE_SIZE)
@@ -53,6 +51,5 @@ def send_file(filename):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)
     app.run()
-    
