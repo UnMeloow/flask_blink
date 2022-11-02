@@ -1,4 +1,4 @@
-FROM python:3
+FROM nvidia/cuda:11.4.0-cudnn8-devel-ubuntu20.04
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 COPY . /app
@@ -14,4 +14,5 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 # Run app.py when the container launches
+RUN python app.py
 CMD ["python", "app.py"]
